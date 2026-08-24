@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { createRoot } from "react-dom/client";
+import places from "./data/places.json";
 import "./style.css";
 
 type Day = { date: string; title: string; area: string; flow: string; food: string; tone: string; detail: string; status?: string };
@@ -21,6 +22,19 @@ const shops = [
   ["다누키코지", "밤 산책 중 탐색·개인 쇼핑", "다누키야 · 코부시야 · 돈키호테"]
 ];
 
+const savedPlaceGroups = ["삿포로", "조잔케이", "오타루", "비에이·후라노", "신치토세"].map(area => ({
+  area,
+  places: places.filter(place => place.area === area)
+}));
+
+const categoryLabel: Record<string, string> = {
+  cafe: "카페",
+  food: "식당",
+  shop: "쇼핑",
+  spot: "명소",
+  stay: "숙소"
+};
+
 function App() {
   const [selected, setSelected] = useState(0);
   const [showMaybe, setShowMaybe] = useState(true);
@@ -32,6 +46,7 @@ function App() {
     <section id="itinerary" className="itinerary"><div className="section-head"><p className="section-label">DAY BY DAY</p><h2>7 days<br />of small stories.</h2><label className="toggle"><input checked={showMaybe} onChange={e => setShowMaybe(e.target.checked)} type="checkbox" /><span></span>미정 계획도 보기</label></div><div className="day-layout"><div className="day-list">{days.map((d, i) => <button onClick={() => setSelected(i)} className={i === selected ? "active" : ""} key={d.date}><small>{d.date}</small><strong>DAY {i + 1}</strong><span>{d.title}</span>{d.status === "투어 미정" && showMaybe && <i>검토</i>}</button>)}</div><article className={`day-card ${day.tone}`}><div className="card-number">0{selected + 1}</div><p>{day.date} · {day.area}</p><h3>{day.title}</h3><div className="route">{day.flow.split(" · ").map((x, i) => <span key={x}>{x}{i < day.flow.split(" · ").length - 1 && <b>→</b>}</span>)}</div><p className="detail">{day.detail}</p><div className="food"><span>오늘의 맛</span><strong>{day.food}</strong></div></article></div></section>
     <section id="notes" className="notes"><div><p className="section-label">KEEP IN MIND</p><h2>여행을 더 가볍게<br />만드는 작은 메모.</h2></div><div className="note-grid"><article><span>01</span><h3>숙소 & 짐</h3><p>게이큐 엑스 호텔 1박, 스이잔테이 클럽 조잔케이 1박, Y’s Sapporo 에어비앤비 4박. 조잔케이 복귀 버스의 승차장은 체크인 때 확인한다.</p></article><article><span>02</span><h3>겨울의 밤</h3><p>11/20 화이트 일루미네이션과 뮌헨 크리스마스 마켓, 11/21 오타루 푸른 운하는 여행의 고정된 야간 장면이다.</p></article><article><span>03</span><h3>고독한 미식가</h3><p>오타루 하츠하나는 운하 다음 저녁 후보. 작은 가게라 예약과 현금 준비가 필요하다. 니쿠노 아사쿠라는 징기스칸 대안으로 둔다.</p></article><article><span>04</span><h3>출발 전</h3><p>비에이 버스투어, 에어비앤비 사전체크인, 여행자보험·eSIM, 폭설·강풍과 로프웨이 운휴 여부만 출발 직전에 다시 확인한다.</p></article></div></section>
     <section id="shopping" className="shopping"><div className="shop-title"><p className="section-label">SOUVENIR EDIT</p><h2>좋아하는 사람에게<br /><em>홋카이도를 담아.</em></h2><p>시내에서 특별한 선물을 먼저 고르고, 공항에서 회사용 대량 과자를 마무리하는 순서가 가장 편하다.</p></div><div className="shop-list">{shops.map(([name, desc, picks], i) => <article key={name}><span>0{i + 1}</span><div><h3>{name}</h3><p>{desc}</p></div><strong>{picks}</strong></article>)}</div></section>
+    <section className="saved-places"><div className="saved-title"><p className="section-label">SAVED ON MAPS</p><h2>저장해 둔<br /><em>{places.length}개의 장소.</em></h2><p>Google 지도 Takeout에서 가져온 원본 링크입니다. 각 장소를 눌러 바로 지도에서 열 수 있어요.</p></div><div className="saved-groups">{savedPlaceGroups.map(group => <article key={group.area}><div className="saved-area"><h3>{group.area}</h3><span>{group.places.length} PLACES</span></div><ul>{group.places.map(place => <li key={place.id}><a href={place.googleMapsUrl} target="_blank" rel="noreferrer"><span>{place.name}</span><small>{categoryLabel[place.category]}</small><b>↗</b></a></li>)}</ul></article>)}</div></section>
     <section className="checklist"><p className="section-label">NEXT TO DO</p><h2>출발 전, 남은 네 가지.</h2><ol><li>OneStay 에어비앤비 사전체크인</li><li className={showMaybe ? "pending" : "hide"}>11월 22일 비에이 버스투어 예약</li><li>조잔케이 복귀버스 정확한 승차장 확인</li><li>여행자보험·eSIM 및 직전 날씨 확인</li></ol></section>
     <footer><span>SEOHO & SEIN'S TRAVEL NOTE</span><span>HOKKAIDO · NOVEMBER 2026</span></footer>
   </main>;
