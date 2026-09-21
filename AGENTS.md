@@ -38,7 +38,7 @@ pnpm --dir .local-tools add -D sharp-cli
 
 ```bash
 pnpm --dir .local-tools exec sharp \
-  -i public/places/*.png \
+  -i "$PWD"/public/places/*.png \
   -o /private/tmp/hokkaido-webp-output \
   -f webp -q 84 --effort 6
 ```
