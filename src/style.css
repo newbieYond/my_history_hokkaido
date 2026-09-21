@@ -345,6 +345,33 @@
   margin-bottom:15px !important;
 }
 
+.place-opinions > div {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+  margin-top:12px;
+}
+
+.place-opinions section {
+  padding:11px 12px;
+  border:1px solid rgba(20,35,58,.12);
+  background:#f7f7f3;
+}
+
+.place-opinions strong {
+  color:#9b654b;
+  font:10px "DM Mono", monospace;
+  letter-spacing:.06em;
+}
+
+.place-opinions p {
+  min-height:3.4em;
+  margin:7px 0 0;
+  color:#53606a;
+  font-size:11px;
+  line-height:1.7;
+}
+
 .place-consensus > div {
   display:grid;
   grid-template-columns:1fr 1fr;
@@ -484,6 +511,10 @@
   }
 
   .place-consensus > div {
+    grid-template-columns:1fr;
+  }
+
+  .place-opinions > div {
     grid-template-columns:1fr;
   }
 
