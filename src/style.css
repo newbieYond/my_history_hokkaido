@@ -358,9 +358,18 @@
 }
 
 .place-opinions strong {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
   color:#9b654b;
   font:10px "DM Mono", monospace;
   letter-spacing:.06em;
+}
+
+.place-opinions strong em {
+  color:#75808a;
+  font-style:normal;
+  letter-spacing:0;
 }
 
 .place-opinions p {
