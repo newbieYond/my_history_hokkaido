@@ -347,9 +347,8 @@
 
 .place-opinions > div {
   display:grid;
-  grid-template-columns:1fr 1fr;
+  grid-template-columns:1fr;
   gap:8px;
-  margin-top:12px;
 }
 
 .place-opinions section {
@@ -511,10 +510,6 @@
   }
 
   .place-consensus > div {
-    grid-template-columns:1fr;
-  }
-
-  .place-opinions > div {
     grid-template-columns:1fr;
   }
 
