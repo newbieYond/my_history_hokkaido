@@ -24,6 +24,27 @@ pnpm build
 
 개발이 끝나면 반드시 `pnpm build`를 실행합니다. 데스크톱과 모바일에서 일정 선택, 미정 계획 토글, 외부 링크와 레이아웃을 직접 확인합니다.
 
+## 장소 대표 이미지 변환
+
+장소 대표 이미지는 `public/places/`에 WebP로 저장합니다. 원본 해상도는 유지하고, 사진형 AI 이미지에는 WebP 품질 84와 effort 6을 기본값으로 사용합니다.
+
+반복 변환용 `sharp-cli`는 Git에 포함하지 않는 `.local-tools/`에 설치합니다. 처음 한 번만 다음 명령으로 설치합니다.
+
+```bash
+pnpm --dir .local-tools add -D sharp-cli
+```
+
+변환은 출력용 임시 폴더를 거쳐 검수한 뒤 `public/places/`로 옮기고, `src/data/places.json`의 `imagePath` 확장자를 `.webp`로 갱신합니다.
+
+```bash
+pnpm --dir .local-tools exec sharp \
+  -i public/places/*.png \
+  -o /private/tmp/hokkaido-webp-output \
+  -f webp -q 84 --effort 6
+```
+
+변환 후에는 원본·출력 모두의 픽셀 크기와 상세 팝업 표시를 확인합니다. 원본 PNG는 WebP 확인과 빌드가 끝난 뒤에만 제거합니다.
+
 ## 작업·배포 흐름
 
 기본 순서는 반드시 **개발 → 테스트 → 커밋 → 푸시 → 배포 확인**입니다. 자동 검사와 필요한 브라우저 검증을 통과한 변경만 커밋합니다.
