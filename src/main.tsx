@@ -1,107 +1,76 @@
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
-import places from "./data/places.json";
+import { AppNav } from "./components/AppNav";
+import { PlaceDetailModal } from "./components/PlaceDetailModal";
+import { appTabs, type AppTab } from "./data/itinerary";
+import type { Place } from "./lib/placeHelpers";
+import { ChecklistScreen } from "./screens/ChecklistScreen";
+import { HomeScreen } from "./screens/HomeScreen";
+import { ItineraryScreen } from "./screens/ItineraryScreen";
+import { NotesScreen } from "./screens/NotesScreen";
+import { SavedPlacesScreen } from "./screens/SavedPlacesScreen";
+import { ShoppingScreen } from "./screens/ShoppingScreen";
 import "./style.css";
 
-type Day = { date: string; title: string; area: string; flow: string; food: string; tone: string; detail: string; status?: string };
+const validScreens = new Set<AppTab>(appTabs.map(([id]) => id));
 
-const days: Day[] = [
-  { date: "11.18 WED", title: "인천 → 삿포로", area: "SAPPORO", flow: "신치토세 · 삿포로역 · 다누키코지", food: "수프카레 또는 미소라멘 · 시메파르페", tone: "arrival", detail: "7C1503 12:15 인천 T1 출발 · 15:00 신치토세 도착. 17시경 게이큐 엑스 호텔에 짐을 맡기고, 다누키코지와 스스키노를 가볍게 걷는다. 컨디션이 좋으면 노르베사 관람차와 사토 시메파르페를 덧붙인다.", status: "항공 확정" },
-  { date: "11.19 THU", title: "조잔케이의 하루", area: "JŌZANKEI", flow: "오도리 · 송영버스 · 료칸 · 온천가", food: "가이세키 · 홋카이도 사케", tone: "onsen", detail: "10:20 호텔 체크아웃 후 11:15 오도리 니시 5초메 집결. 11:30 송영버스로 스이잔테이 클럽 조잔케이로 이동해 객실 노천탕과 휴식을 즐긴다. 체크인 전후에는 겐센공원, 이와토 간논도, 후타미 현수교와 타로노유 족욕을 날씨에 맞춰 짧게 걷는다.", status: "료칸·송영 확정" },
-  { date: "11.20 FRI", title: "겨울빛의 시작", area: "SAPPORO", flow: "조잔케이 · 삿포로역 쇼핑 · 오도리", food: "이자카야 또는 맥주가든 · 시메파르페", tone: "light", detail: "13:00 조잔케이 출발. 삿포로역에서 다이마루 B1·스텔라플레이스·사계 마르셰·도산코 플라자를 들른 뒤 16:00 Y’s Sapporo 에어비앤비에 체크인한다. 저녁에는 화이트 일루미네이션과 뮌헨 크리스마스 마켓을 만난다.", status: "이벤트 관람" },
-  { date: "11.21 SAT", title: "푸른 운하, 오타루", area: "OTARU", flow: "미나미오타루 · 사카이마치 · 운하 · 테미야선", food: "초밥 · 르타오 · 오뎅", tone: "otaru", detail: "JR로 미나미오타루역에서 시작해 다나카주조, 사카이마치, 르타오를 지나 오타루 운하까지 내리막으로 걷는다. 포트 마르셰 오타루에와 아트 베이스를 선택지로 두고, 일몰 뒤 푸른 운하·구 테미야선 산책로와 하츠하나를 잇는다. 초밥·와카도리 시대 나루토·북해도 운하창고는 식사 대안으로 남긴다.", status: "JR 당일치기" },
-  { date: "11.22 SUN", title: "비에이의 겨울색", area: "BIEI", flow: "삿포로 출발 · 청의호수 · 흰수염폭포", food: "투어 식사 · 복귀 후 라멘", tone: "blue", detail: "청의호수와 흰수염폭포를 포함한 삿포로 출발 1일 버스투어를 예약할 예정이다. 야간 라이트업과 닝글테라스 포함 여부는 출발 전 다시 확인한다.", status: "투어 미정" },
-  { date: "11.23 MON", title: "트램과 야경", area: "SAPPORO", flow: "니조시장 · 치토세츠루 · 시전 · 모이와야마", food: "카이센동 · 징기스칸", tone: "night", detail: "니조시장에서 시작해 사케 뮤지엄, 나카지마공원과 고코쿠 신사를 거쳐 삿포로 시전 한 바퀴(약 55분)를 탄다. 후시미 이나리 신사는 모이와야마 전후 택시 선택지로 둔다. 홋카이도 신궁과 사토랜드는 별도 반나절 대안이라 당일 핵심 동선에는 넣지 않는다.", status: "공휴일" },
-  { date: "11.24 TUE", title: "공항의 마지막 한입", area: "NEW CHITOSE", flow: "체크아웃 · 국내선 2층 · 연결시설 · 귀국", food: "에비소바 · 소프트아이스크림", tone: "airport", detail: "10:00 체크아웃 후 공항으로 바로 이동. 국내선 2층에서 기념품을 사고, 라멘 도장에서 점심을 해결한 뒤 스마일 로드와 로이즈 초콜릿 월드를 둘러본다. 누벨바그 르타오·모리모토는 개인 선물 보완용이다. 7C1504 16:00 출발 · 19:25 인천 도착.", status: "항공 확정" }
-];
-
-const shops = [
-  ["공항 국내선 2층", "회사용 대량 과자 · 마지막 냉장 선물", "흰 연인 · 삿포로농학교 · 자가포클"],
-  ["다이마루 삿포로 B1", "부모님·여자친구용 고급 선물", "SNOW CHEESE · 노스맨 · ISHIYA G"],
-  ["오타루 사카이마치", "동선 속 브랜드 한정품", "르타오 · 키타카로 · 롯카테이"],
-  ["다누키코지", "밤 산책 중 탐색·개인 쇼핑", "다누키야 · 코부시야 · 돈키호테"]
-];
-
-const savedPlaceTabs = [
-  { label: "오타루", areas: ["오타루"] },
-  { label: "비에이 및 후라노", areas: ["비에이·후라노"] },
-  { label: "조잔케이", areas: ["조잔케이"] },
-  { label: "삿포로 시내", areas: ["삿포로"] },
-  { label: "그밖에 (공항 포함)", areas: ["신치토세"] }
-].map(tab => ({
-  ...tab,
-  places: places.filter(place => tab.areas.includes(place.area))
-}));
-
-const categoryLabel: Record<string, string> = {
-  cafe: "카페",
-  food: "식당",
-  shop: "쇼핑",
-  spot: "명소",
-  stay: "숙소"
+const screenFromHash = (): AppTab => {
+  const candidate = window.location.hash.replace("#", "") as AppTab;
+  return validScreens.has(candidate) ? candidate : "home";
 };
-
-const placeImageUrl = (place: (typeof places)[number]) => place.imagePath ? `/my_history_hokkaido/${place.imagePath}` : null;
-
-const averageRating = (place: (typeof places)[number]) => {
-  const ratings = [place.seonghoRating, place.seinRating].filter(rating => rating > 0);
-  return ratings.length ? ratings.reduce((total, rating) => total + rating, 0) / ratings.length : 0;
-};
-
-const travelGuide = (place: (typeof places)[number]) => ({
-  summary: place.reviewSummary
-});
-
-const itineraryFit = (place: (typeof places)[number]) => {
-  const day = days[place.day - 1];
-  const purpose: Record<string, string> = {
-    food: "식사",
-    cafe: "휴식",
-    shop: "쇼핑",
-    spot: "산책·관람",
-    stay: "숙소 체류"
-  };
-  const status = place.isSelected
-    ? "현재 일정에 실제로 넣어 둔 선택지"
-    : place.isReserve
-      ? "시간과 컨디션이 맞을 때 꺼내 볼 예비 후보"
-      : "하루 동선의 기준점으로 저장한 장소";
-
-  return `DAY ${place.day} ${day.title}는 ${day.flow} 순서로 움직이는 날입니다. ${place.name}은(는) ${status}예요. ${purpose[place.category]}에 시간을 쓸지, 같은 동선의 다른 후보로 바꿀지는 당일 이동 속도와 대기 상황을 보고 정하면 됩니다.`;
-};
-
-const appTabs = [
-  ["home", "홈"],
-  ["itinerary", "일정"],
-  ["notes", "여행 노트"],
-  ["shopping", "쇼핑"],
-  ["saved", "저장 장소"],
-  ["checklist", "체크리스트"]
-] as const;
-
-type AppTab = (typeof appTabs)[number][0];
 
 function App() {
-  const [selected, setSelected] = useState(0);
+  const [selectedDay, setSelectedDay] = useState(0);
   const [showMaybe, setShowMaybe] = useState(true);
   const [activePlaceTab, setActivePlaceTab] = useState(0);
-  const [activeScreen, setActiveScreen] = useState<AppTab>("home");
-  const [detailPlace, setDetailPlace] = useState<(typeof places)[number] | null>(null);
-  const day = days[selected];
-  const activeSavedPlaceGroup = savedPlaceTabs[activePlaceTab];
-  return <main className="app-shell">
-    <nav className="app-nav"><button className="brand" aria-label="홈 화면 보기" onClick={() => setActiveScreen("home")}>HOKKAIDO <i>26</i></button><div className="navlinks" role="tablist" aria-label="여행 가이드 메뉴">{appTabs.map(([id, label]) => <button type="button" role="tab" aria-label={`${label} 화면 보기`} aria-selected={activeScreen === id} className={activeScreen === id ? "active" : ""} onClick={() => setActiveScreen(id)} key={id}>{label}</button>)}</div><span className="navdate">18—24 NOV</span></nav>
-    <div className="screen-content">
-      {activeScreen === "home" && <section className="hero"><div className="flakes">✦　·　✧　·　✦　·　✧</div><p className="eyebrow">A WINTER TRAVEL NOTE</p><h1>눈이 오기 전,<br /><em>Hokkaido.</em></h1><div className="hero-bottom"><p>2026. 11. 18 — 11. 24<br />SEONGHO & SEIN · 6 NIGHTS, 7 DAYS</p><button className="hero-cta" aria-label="일정 화면 보기" onClick={() => setActiveScreen("itinerary")}>여행 살펴보기 <span>↓</span></button></div></section>}
-      {activeScreen === "itinerary" && <><section className="intro"><p className="section-label">THE PLAN</p><h2>따뜻한 온천과 푸른 밤,<br />천천히 걷는 북쪽의 일주일.</h2><p className="introcopy">삿포로를 베이스로 조잔케이의 객실 노천탕, 오타루의 푸른 운하, 비에이의 겨울 풍경을 만나는 두 사람의 첫 홋카이도 여행.</p><div className="stat-grid"><div><b>02</b><span>TRAVELLERS</span></div><div><b>06</b><span>NIGHTS</span></div><div><b>05</b><span>CITIES & TOWNS</span></div><div><b>¥50K</b><span>CASH TO PREPARE</span></div></div></section><section className="itinerary"><div className="section-head"><p className="section-label">DAY BY DAY</p><h2>7 days<br />of small stories.</h2><label className="toggle"><input checked={showMaybe} onChange={e => setShowMaybe(e.target.checked)} type="checkbox" /><span></span>미정 계획도 보기</label></div><div className="day-layout"><div className="day-list"><div className="day-selector" role="tablist" aria-label="일정 날짜 선택">{days.map((d, i) => <button onClick={() => setSelected(i)} aria-selected={i === selected} className={i === selected ? "active" : ""} key={d.date}><small>{d.date}</small><strong>DAY {i + 1}</strong><span>{d.title}</span>{d.status === "투어 미정" && showMaybe && <i>검토</i>}</button>)}</div><article className="day-selection-summary" aria-live="polite"><small>DAY {selected + 1} · {day.date}</small><strong>{day.title}</strong><div>{day.flow.split(" · ").map((x, i) => <span key={x}>{x}{i < day.flow.split(" · ").length - 1 && <b>→</b>}</span>)}</div><p>{day.detail}</p></article></div><article className={`day-card ${day.tone}`}><div className="card-number">0{selected + 1}</div><p>{day.date} · {day.area}</p><h3>{day.title}</h3><div className="route">{day.flow.split(" · ").map((x, i) => <span key={x}>{x}{i < day.flow.split(" · ").length - 1 && <b>→</b>}</span>)}</div><p className="detail">{day.detail}</p><div className="food"><span>오늘의 맛</span><strong>{day.food}</strong></div></article></div></section></>}
-      {activeScreen === "notes" && <section className="notes"><div><p className="section-label">KEEP IN MIND</p><h2>여행을 더 가볍게<br />만드는 작은 메모.</h2></div><div className="note-grid"><article><span>01</span><h3>숙소 & 짐</h3><p>게이큐 엑스 호텔 1박, 스이잔테이 클럽 조잔케이 1박, Y’s Sapporo 에어비앤비 4박. 조잔케이 복귀 버스의 승차장은 체크인 때 확인한다.</p></article><article><span>02</span><h3>겨울의 밤</h3><p>11/20 화이트 일루미네이션과 뮌헨 크리스마스 마켓, 11/21 오타루 푸른 운하는 여행의 고정된 야간 장면이다.</p></article><article><span>03</span><h3>고독한 미식가</h3><p>오타루 하츠하나는 운하 다음 저녁 후보. 작은 가게라 예약과 현금 준비가 필요하다. 니쿠노 아사쿠라는 징기스칸 대안으로 둔다.</p></article><article><span>04</span><h3>출발 전</h3><p>비에이 버스투어, 에어비앤비 사전체크인, 여행자보험·eSIM, 폭설·강풍과 로프웨이 운휴 여부만 출발 직전에 다시 확인한다.</p></article></div></section>}
-      {activeScreen === "shopping" && <section className="shopping"><div className="shop-title"><p className="section-label">SOUVENIR EDIT</p><h2>좋아하는 사람에게<br /><em>홋카이도를 담아.</em></h2><p>시내에서 특별한 선물을 먼저 고르고, 공항에서 회사용 대량 과자를 마무리하는 순서가 가장 편하다.</p></div><div className="shop-list">{shops.map(([name, desc, picks], i) => <article key={name}><span>0{i + 1}</span><div><h3>{name}</h3><p>{desc}</p></div><strong>{picks}</strong></article>)}</div></section>}
-      {activeScreen === "saved" && <section className="saved-places"><div className="saved-title"><p className="section-label">SAVED ON MAPS</p><h2>저장해 둔<br /><em>{places.length}개의 장소.</em></h2><p>정확한 Google 지도 링크와 여행 전 체크할 내용을 한곳에 모았습니다. 사진과 후기는 직접 기록해 채워 갈 수 있어요.</p><p className="place-verification">2026.09.06 · Google 지도 공유 목록 대조<br />폐업 반영 · {places.length}곳 표시</p></div><div className="saved-content"><div className="place-tabs" role="tablist" aria-label="저장 장소 권역"><div className="place-tabs-scroll">{savedPlaceTabs.map((tab, index) => <button type="button" role="tab" aria-selected={index === activePlaceTab} className={index === activePlaceTab ? "active" : ""} onClick={() => setActivePlaceTab(index)} key={tab.label}>{tab.label}<span>{tab.places.length}</span></button>)}</div></div><article className="saved-group" role="tabpanel"><div className="saved-area"><div><p className="section-label">AREA GUIDE</p><h3>{activeSavedPlaceGroup.label}</h3></div><span>{activeSavedPlaceGroup.places.length} PLACES</span></div><ul>{activeSavedPlaceGroup.places.map(place => <li className="saved-place-card" key={place.id}><div className="saved-place-card-head"><div><span>{place.name}</span><small>{place.isSelected ? `일정 추가 · ${categoryLabel[place.category]}` : categoryLabel[place.category]}</small></div></div><div className="saved-place-card-footer"><span className="place-rating" aria-label={`성호 ${place.seonghoRating.toFixed(1)}점, 세인 ${place.seinRating.toFixed(1)}점의 평균 ${averageRating(place).toFixed(1)}점, 5점 만점`}><b>{averageRating(place) > 0 ? "★" : "☆"}</b> 평균 {averageRating(place).toFixed(1)} <em>/ 5.0</em></span><div className="saved-place-card-actions"><button type="button" className="place-detail-button" aria-label={`${place.name} 상세 보기`} onClick={() => setDetailPlace(place)}>상세 보기</button><a className="place-map-link" href={place.googleMapsUrl} target="_blank" rel="noreferrer" aria-label={`${place.name} Google 지도에서 보기`}>Google 지도 ↗</a></div></div></li>)}</ul></article></div></section>}
-      {activeScreen === "checklist" && <section className="checklist"><p className="section-label">NEXT TO DO</p><h2>출발 전, 남은 네 가지.</h2><ol><li>OneStay 에어비앤비 사전체크인</li><li className={showMaybe ? "pending" : "hide"}>11월 22일 비에이 버스투어 예약</li><li>조잔케이 복귀버스 정확한 승차장 확인</li><li>여행자보험·eSIM 및 직전 날씨 확인</li></ol></section>}
-    </div>
-    {detailPlace && <div className="place-detail-backdrop" role="presentation" onMouseDown={() => setDetailPlace(null)}><section className="place-detail-modal" role="dialog" aria-modal="true" aria-labelledby="place-detail-title" onMouseDown={event => event.stopPropagation()}><button type="button" className="place-detail-close" aria-label="상세 팝업 닫기" onClick={() => setDetailPlace(null)}>×</button><p className="section-label">PLACE NOTE</p><div className="place-detail-heading"><div><h2 id="place-detail-title">{detailPlace.name}</h2><p>{detailPlace.isSelected ? `일정 추가 · ${categoryLabel[detailPlace.category]}` : categoryLabel[detailPlace.category]}</p></div><span className="place-detail-rating" aria-label={`성호 ${detailPlace.seonghoRating.toFixed(1)}점, 세인 ${detailPlace.seinRating.toFixed(1)}점의 평균 ${averageRating(detailPlace).toFixed(1)}점, 5점 만점`}>{averageRating(detailPlace) > 0 ? "★" : "☆"} <small>평균 {averageRating(detailPlace).toFixed(1)} / 5.0</small></span></div><div className="place-image-frame" aria-label={detailPlace.imagePath ? `${detailPlace.name} 대표 이미지` : `${detailPlace.name} 대표 이미지 준비 중`}>{placeImageUrl(detailPlace) ? <img src={placeImageUrl(detailPlace)!} alt={`${detailPlace.name} 대표 겨울 여행 이미지`} /> : <div className="place-image-empty"><span>PLACE IMAGE</span><strong>대표 이미지 준비 중</strong><p>이 장소를 떠올릴 수 있는 한 장의 이미지를 추가할 예정입니다.</p></div>}</div><article className="place-summary"><h3>후기 종합</h3><p>{travelGuide(detailPlace).summary}</p></article><article className="place-itinerary"><h3>우리 일정에서</h3><p>{itineraryFit(detailPlace)}</p></article><article className="place-opinions"><div><section><strong><span>성호의 의견</span><em>{detailPlace.seonghoRating.toFixed(1)} / 5.0</em></strong><p>{detailPlace.seonghoOpinion}</p></section><section><strong><span>세인의 의견</span><em>{detailPlace.seinRating.toFixed(1)} / 5.0</em></strong><p>{detailPlace.seinOpinion}</p></section></div></article><a href={detailPlace.googleMapsUrl} target="_blank" rel="noreferrer">Google 지도에서 보기 ↗</a></section></div>}
-    <footer><span>SEONGHO & SEIN'S TRAVEL NOTE</span><span>HOKKAIDO · NOVEMBER 2026</span></footer>
-  </main>;
+  const [activeScreen, setActiveScreen] = useState<AppTab>(screenFromHash);
+  const [detailPlace, setDetailPlace] = useState<Place | null>(null);
+  const closePlaceDetail = useCallback(() => setDetailPlace(null), []);
+
+  const navigate = useCallback((screen: AppTab) => {
+    setActiveScreen(screen);
+    const nextHash = `#${screen}`;
+    if (window.location.hash !== nextHash) window.history.pushState(null, "", nextHash);
+  }, []);
+
+  useEffect(() => {
+    document.documentElement.scrollTop = 0;
+    document.documentElement.scrollLeft = 0;
+    document.body.scrollTop = 0;
+    document.body.scrollLeft = 0;
+  }, [activeScreen]);
+
+  useEffect(() => {
+    const handleHistoryChange = () => setActiveScreen(screenFromHash());
+    window.addEventListener("popstate", handleHistoryChange);
+    return () => window.removeEventListener("popstate", handleHistoryChange);
+  }, []);
+
+  return <div className="app-shell">
+    <AppNav activeScreen={activeScreen} onNavigate={navigate} />
+    <main className="screen-content" key={activeScreen}>
+      {activeScreen === "home" && <HomeScreen onOpenItinerary={() => navigate("itinerary")} />}
+      {activeScreen === "itinerary" && <ItineraryScreen
+        selected={selectedDay}
+        showMaybe={showMaybe}
+        onSelectDay={setSelectedDay}
+        onToggleMaybe={() => setShowMaybe(current => !current)}
+      />}
+      {activeScreen === "notes" && <NotesScreen />}
+      {activeScreen === "shopping" && <ShoppingScreen />}
+      {activeScreen === "saved" && <SavedPlacesScreen
+        activePlaceTab={activePlaceTab}
+        onChangePlaceTab={setActivePlaceTab}
+        onOpenPlace={setDetailPlace}
+      />}
+      {activeScreen === "checklist" && <ChecklistScreen showMaybe={showMaybe} />}
+    </main>
+    {detailPlace && <PlaceDetailModal place={detailPlace} onClose={closePlaceDetail} />}
+    <footer>
+      <span>SEONGHO & SEIN'S TRAVEL NOTE</span>
+      <span>HOKKAIDO · NOVEMBER 2026</span>
+    </footer>
+  </div>;
 }
 
 createRoot(document.getElementById("root")!).render(<App />);
