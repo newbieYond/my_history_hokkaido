@@ -112,7 +112,7 @@ export function PlaceDetailModal({ place, onClose }: PlaceDetailModalProps) {
       <article className="place-opinions">
         <div>
           <section>
-            <strong><span>성호의 의견</span><em>{opinionRating(place.seonghoRating)}</em></strong>
+            <strong><span>성호의견</span><em>{opinionRating(place.seonghoRating)}</em></strong>
             <p>{place.seonghoOpinion}</p>
           </section>
           <section>

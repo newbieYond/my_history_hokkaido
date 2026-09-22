@@ -11,6 +11,14 @@ export const categoryLabel: Record<string, string> = {
   stay: "숙소"
 };
 
+export const categoryIcon: Record<string, string> = {
+  cafe: "☕",
+  food: "🍽",
+  shop: "🛍",
+  spot: "📍",
+  stay: "🛏"
+};
+
 export const savedPlaceTabs = [
   { label: "오타루", areas: ["오타루"] },
   { label: "비에이 및 후라노", areas: ["비에이·후라노"] },

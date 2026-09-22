@@ -1,6 +1,7 @@
 import { useRef, type KeyboardEvent } from "react";
 import places from "../data/places.json";
 import {
+  categoryIcon,
   categoryLabel,
   ratingDetails,
   savedPlaceTabs,
@@ -72,11 +73,18 @@ export function SavedPlacesScreen({ activePlaceTab, onChangePlaceTab, onOpenPlac
         <ul>
           {activeGroup.places.map(place => {
             const rating = ratingDetails(place);
+            const placeType = place.isSelected
+              ? `일정 추가 · ${categoryLabel[place.category]}`
+              : categoryLabel[place.category];
             return <li className="saved-place-card" key={place.id}>
               <div className="saved-place-card-head">
+                <span className="place-icons" aria-hidden="true">
+                  {place.isSelected && <i>🗓</i>}
+                  <i>{categoryIcon[place.category]}</i>
+                </span>
                 <div>
-                  <span>{place.name}</span>
-                  <small>{place.isSelected ? `일정 추가 · ${categoryLabel[place.category]}` : categoryLabel[place.category]}</small>
+                  <span className="place-name">{place.name}</span>
+                  <span className="sr-only">{placeType}</span>
                 </div>
               </div>
               <div className="saved-place-card-footer">
@@ -84,6 +92,7 @@ export function SavedPlacesScreen({ activePlaceTab, onChangePlaceTab, onOpenPlac
                   <b>{rating.value === null ? "☆" : "★"}</b>
                   {rating.label}{rating.value === null ? "" : <em> / 5.0</em>}
                 </span>
+                <p className="place-opinion"><b>성호의견</b>{place.seonghoOpinion}</p>
                 <div className="saved-place-card-actions">
                   <button type="button" className="place-detail-button" aria-label={`${place.name} 상세 보기`} onClick={() => onOpenPlace(place)}>상세 보기</button>
                   <a className="place-map-link" href={place.googleMapsUrl} target="_blank" rel="noreferrer" aria-label={`${place.name} Google 지도에서 보기`}>Google 지도 ↗</a>
