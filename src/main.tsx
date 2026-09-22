@@ -43,7 +43,10 @@ const categoryLabel: Record<string, string> = {
 
 const placeImageUrl = (place: (typeof places)[number]) => place.imagePath ? `/my_history_hokkaido/${place.imagePath}` : null;
 
-const averageRating = (place: (typeof places)[number]) => (place.seonghoRating + place.seinRating) / 2;
+const averageRating = (place: (typeof places)[number]) => {
+  const ratings = [place.seonghoRating, place.seinRating].filter(rating => rating > 0);
+  return ratings.length ? ratings.reduce((total, rating) => total + rating, 0) / ratings.length : 0;
+};
 
 const travelGuide = (place: (typeof places)[number]) => ({
   summary: place.reviewSummary
