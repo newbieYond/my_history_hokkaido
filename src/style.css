@@ -345,7 +345,7 @@
   margin-bottom:15px !important;
 }
 
-.place-opinions > div {
+.place-detail-modal .place-opinions > div {
   display:grid;
   grid-template-columns:1fr;
   gap:8px;

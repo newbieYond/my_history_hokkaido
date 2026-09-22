@@ -92,7 +92,7 @@
     "imagePath": "places/biei-parent-child-tree-summary.webp",
     "seonghoOpinion": "풍경 보고 사진찍어서 남길만은 하다. 투어에 포함되어있으면 가볼만?",
     "seinOpinion": "의견을 입력하기 전입니다.",
-    "seonghoRating": 3.0,
+    "seonghoRating": 3,
     "seinRating": 0
   },
   {
@@ -108,7 +108,7 @@
     "imagePath": "places/new-chitose-airport-summary.webp",
     "seonghoOpinion": "의미가 없다. 공항은 공항이다. 그냥 귀국 전 쇼핑과 식사 정도만.",
     "seinOpinion": "의견을 입력하기 전입니다.",
-    "seonghoRating": 3.0,
+    "seonghoRating": 3,
     "seinRating": 0
   },
   {
@@ -156,7 +156,7 @@
     "imagePath": "places/nijo-market-summary.webp",
     "seonghoOpinion": "일본 시장이라, 한번 가봐야함. 거리도 멀지 않아 추천",
     "seinOpinion": "의견을 입력하기 전입니다.",
-    "seonghoRating": 4.0,
+    "seonghoRating": 4,
     "seinRating": 0
   },
   {
@@ -188,7 +188,7 @@
     "imagePath": "places/junpei-summary.webp",
     "seonghoOpinion": "유명한 투어 중간 식당. 거의 반? 필수면서 맛도 괜찮다는 소리",
     "seinOpinion": "의견을 입력하기 전입니다.",
-    "seonghoRating": 4.0,
+    "seonghoRating": 4,
     "seinRating": 0
   },
   {
@@ -252,7 +252,7 @@
     "imagePath": "places/blue-pond-summary.webp",
     "seonghoOpinion": "약간 랜드마크같은 느낌이라 꼭 방문하고싶긴함",
     "seinOpinion": "의견을 입력하기 전입니다.",
-    "seonghoRating": 4.0,
+    "seonghoRating": 4,
     "seinRating": 0
   },
   {
@@ -268,7 +268,7 @@
     "imagePath": "places/sapporo-ramen-yokocho-summary.webp",
     "seonghoOpinion": "어떤 라멘집이든 일단 들어가서 한번은 먹어보고 싶음.",
     "seinOpinion": "의견을 입력하기 전입니다.",
-    "seonghoRating": 4.0,
+    "seonghoRating": 4,
     "seinRating": 0
   },
   {
@@ -380,7 +380,7 @@
     "imagePath": "places/kamaei-summary.webp",
     "seonghoOpinion": "오뎅인데요? 오뎅이라니까요?",
     "seinOpinion": "의견을 입력하기 전입니다.",
-    "seonghoRating": 4.0,
+    "seonghoRating": 4,
     "seinRating": 0
   },
   {
@@ -495,7 +495,7 @@
     "imagePath": "places/hokkaido-shiki-marche-summary.webp",
     "seonghoOpinion": "선물 사기 딱 좋은 가게 같음. 지역 특산 기념품이 많다는평. 농학교? 샌드가 짱맛있다고",
     "seinOpinion": "의견을 입력하기 전입니다.",
-    "seonghoRating": 4.0,
+    "seonghoRating": 4,
     "seinRating": 0
   },
   {
@@ -614,7 +614,7 @@
     "imagePath": "places/sapporo-satoland-summary.webp",
     "seonghoOpinion": "공원 산책을 하고 싶으면 여기가 좋다는 평가. 옆에 공원도 큼",
     "seinOpinion": "의견을 입력하기 전입니다.",
-    "seonghoRating": 4.0,
+    "seonghoRating": 4,
     "seinRating": 0
   },
   {
@@ -631,7 +631,7 @@
     "imagePath": "places/norbesa-ferris-wheel-summary.webp",
     "seonghoOpinion": "도심 관람차. 야경 보기 좋을 거 같은데 같이 므흣한 느낌을 내보자. 가까운 지역.",
     "seinOpinion": "의견을 입력하기 전입니다.",
-    "seonghoRating": 4.0,
+    "seonghoRating": 4,
     "seinRating": 0
   },
   {
@@ -665,7 +665,8 @@
     "seonghoOpinion": "온천 근처라 한번 쭉 돌지 않을까?",
     "seinOpinion": "의견을 입력하기 전입니다.",
     "seonghoRating": 3.7,
-    "seinRating": 0
+    "seinRating": 0,
+    "imagePath": "places/default-winter-travel-summary.webp"
   },
   {
     "id": 43,
@@ -681,7 +682,8 @@
     "seonghoOpinion": "온천 근처라 한번 쭉 돌지 않을까?",
     "seinOpinion": "의견을 입력하기 전입니다.",
     "seonghoRating": 3.7,
-    "seinRating": 0
+    "seinRating": 0,
+    "imagePath": "places/default-winter-travel-summary.webp"
   },
   {
     "id": 44,
@@ -697,7 +699,8 @@
     "seonghoOpinion": "온천 근처라 한번 쭉 돌지 않을까?",
     "seinOpinion": "의견을 입력하기 전입니다.",
     "seonghoRating": 3.7,
-    "seinRating": 0
+    "seinRating": 0,
+    "imagePath": "places/default-winter-travel-summary.webp"
   },
   {
     "id": 45,
@@ -713,7 +716,8 @@
     "seonghoOpinion": "온천 근처라 한번 쭉 돌지 않을까?",
     "seinOpinion": "의견을 입력하기 전입니다.",
     "seonghoRating": 3.7,
-    "seinRating": 0
+    "seinRating": 0,
+    "imagePath": "places/default-winter-travel-summary.webp"
   },
   {
     "id": 46,
@@ -726,10 +730,11 @@
     "isReserve": true,
     "isSelected": true,
     "reviewSummary": "무료로 잠깐 몸을 녹이기 좋아 산책 중 쉬기 좋다는 의견입니다. 수건과 복장, 혼잡도를 고려해 오래 머무르기보다 짧은 정차로 잡으면 편합니다. 이곳은 타로노유 족욕 하나만으로 판단하기보다 조잔케이의 계절·날씨·주변 동선이 맞을 때 만족도가 높아지는 유형입니다. 사진 한 장을 위한 급한 방문보다는, 근처의 다른 장소와 묶어 천천히 볼 때 후기에 나온 장점이 잘 드러납니다.",
-    "seonghoOpinion": "",
+    "seonghoOpinion": "그냥 지나가다 들르겠지",
     "seinOpinion": "의견을 입력하기 전입니다.",
-    "seonghoRating": 0,
-    "seinRating": 0
+    "seonghoRating": 3.6,
+    "seinRating": 0,
+    "imagePath": "places/default-winter-travel-summary.webp"
   },
   {
     "id": 47,
@@ -745,7 +750,8 @@
     "seonghoOpinion": "기차 기차 기차 기차! 기찻길입니다요",
     "seinOpinion": "의견을 입력하기 전입니다.",
     "seonghoRating": 4.1,
-    "seinRating": 0
+    "seinRating": 0,
+    "imagePath": "places/temiya-summary.webp"
   },
   {
     "id": 48,
@@ -761,7 +767,8 @@
     "seonghoOpinion": "여유가 있으면 지나가다가 고민해보자",
     "seinOpinion": "의견을 입력하기 전입니다.",
     "seonghoRating": 3.6,
-    "seinRating": 0
+    "seinRating": 0,
+    "imagePath": "places/art-base-summary.webp"
   },
   {
     "id": 49,
@@ -777,7 +784,8 @@
     "seonghoOpinion": "굳이 오타루에서 갈필요 있을까? ",
     "seinOpinion": "의견을 입력하기 전입니다.",
     "seonghoRating": 3.4,
-    "seinRating": 0
+    "seinRating": 0,
+    "imagePath": "places/default-winter-travel-summary.webp"
   },
   {
     "id": 50,
@@ -793,7 +801,8 @@
     "seonghoOpinion": "엄청 궁금하진 않은데 또 아예 궁금하지 않지도 않다.",
     "seinOpinion": "의견을 입력하기 전입니다.",
     "seonghoRating": 3.5,
-    "seinRating": 0
+    "seinRating": 0,
+    "imagePath": "places/denukikoji-summary.webp"
   },
   {
     "id": 51,
@@ -809,7 +818,8 @@
     "seonghoOpinion": "아침이나 점심을 먹기 좋으려나?",
     "seinOpinion": "의견을 입력하기 전입니다.",
     "seonghoRating": 3.8,
-    "seinRating": 0
+    "seinRating": 0,
+    "imagePath": "places/sankaku-market-summary.webp"
   },
   {
     "id": 53,
@@ -825,7 +835,8 @@
     "seonghoOpinion": "굳이...? 의 느낌!",
     "seinOpinion": "의견을 입력하기 전입니다.",
     "seonghoRating": 3.4,
-    "seinRating": 0
+    "seinRating": 0,
+    "imagePath": "places/canal-warehouse-summary.webp"
   },
   {
     "id": 54,
@@ -841,7 +852,8 @@
     "seonghoOpinion": "고-급 디저트 먹고싶어요? ㄱㄱ",
     "seinOpinion": "의견을 입력하기 전입니다.",
     "seonghoRating": 3.9,
-    "seinRating": 0
+    "seinRating": 0,
+    "imagePath": "places/letao-pathos-summary.webp"
   },
   {
     "id": 56,
@@ -857,7 +869,8 @@
     "seonghoOpinion": "가라아게에 맥주한잔? 좋지요",
     "seinOpinion": "의견을 입력하기 전입니다.",
     "seonghoRating": 3.8,
-    "seinRating": 0
+    "seinRating": 0,
+    "imagePath": "places/naruto-summary.webp"
   },
   {
     "id": 57,
@@ -872,8 +885,9 @@
     "reviewSummary": "초콜릿 공정과 매장을 함께 볼 수 있어 선물 구매 전후에 들르기 좋다는 반응입니다. 비행기 직전보다 공항 도착 직후에 보면 시간이 편합니다. 후기상 로이즈 초콜릿 월드의 가치는 오래 머무는 관광보다 선물과 지역 상품을 효율적으로 고르는 데 있습니다. 사고 싶은 품목을 미리 정해 두면 만족도가 높고, 비슷한 상품이 많은 만큼 충동구매는 줄이기 좋습니다.",
     "seonghoOpinion": "치토세 공항에 있는 곳이라 들리기 좋음. ",
     "seinOpinion": "의견을 입력하기 전입니다.",
-    "seonghoRating": 4.0,
-    "seinRating": 0
+    "seonghoRating": 4,
+    "seinRating": 0,
+    "imagePath": "places/royce-world-summary.webp"
   },
   {
     "id": 59,
@@ -888,8 +902,9 @@
     "reviewSummary": "공항 연결 통로 성격이라 별도 관광지로는 짧다는 평가입니다. 다른 시설로 이동하는 길에 가볍게 보는 정도가 적절합니다. 이곳은 스마일 로드 하나만으로 판단하기보다 신치토세의 계절·날씨·주변 동선이 맞을 때 만족도가 높아지는 유형입니다. 사진 한 장을 위한 급한 방문보다는, 근처의 다른 장소와 묶어 천천히 볼 때 후기에 나온 장점이 잘 드러납니다.",
     "seonghoOpinion": "복귀전에 즐겨보아용",
     "seinOpinion": "의견을 입력하기 전입니다.",
-    "seonghoRating": 4.0,
-    "seinRating": 0
+    "seonghoRating": 4,
+    "seinRating": 0,
+    "imagePath": "places/smile-road-summary.webp"
   },
   {
     "id": 60,
@@ -904,8 +919,9 @@
     "reviewSummary": "한 공항 안에서 여러 삿포로 라멘을 비교할 수 있는 점이 장점입니다. 인기 가게는 출국 시간과 겹치면 부담이 될 수 있어 줄을 보고 결정하세요. 후기 흐름을 종합하면 홋카이도 라멘 도장은(는) 신치토세에서 식사 자체를 일정의 한 장면으로 둘 때 가장 설득력이 있습니다. 인기 시간의 대기와 회전율까지 경험의 일부로 보고, 시간이 촉박하면 같은 동선의 대안과 비교하는 편이 낫습니다.",
     "seonghoOpinion": "복귀할때 밥 먹고 오자!",
     "seinOpinion": "의견을 입력하기 전입니다.",
-    "seonghoRating": 4.0,
-    "seinRating": 0
+    "seonghoRating": 4,
+    "seinRating": 0,
+    "imagePath": "places/ramen-dojo-summary.webp"
   },
   {
     "id": 61,
@@ -921,7 +937,8 @@
     "seonghoOpinion": "너무 디저트했던 여정이 아니면 일단 들려는 보자",
     "seinOpinion": "의견을 입력하기 전입니다.",
     "seonghoRating": 3.9,
-    "seinRating": 0
+    "seinRating": 0,
+    "imagePath": "places/nouvelle-vague-letao-summary.webp"
   },
   {
     "id": 62,
@@ -937,7 +954,8 @@
     "seonghoOpinion": "새로운 과자가 있다는 거 같음. 기념품 살까 고민",
     "seinOpinion": "의견을 입력하기 전입니다.",
     "seonghoRating": 3.9,
-    "seinRating": 0
+    "seinRating": 0,
+    "imagePath": "places/morimoto-airport-summary.webp"
   },
   {
     "id": 63,
@@ -952,7 +970,7 @@
     "imagePath": "places/keikyu-ex-hotel-summary.webp",
     "seonghoOpinion": "숙소 숙소~ 1박띠",
     "seinOpinion": "의견을 입력하기 전입니다.",
-    "seonghoRating": 4.0,
+    "seonghoRating": 4,
     "seinRating": 0
   },
   {
@@ -968,7 +986,7 @@
     "imagePath": "places/suwa-shrine-summary.webp",
     "seonghoOpinion": "숙소 근처의 신사, 왠만하면 한번 들러보자",
     "seinOpinion": "의견을 입력하기 전입니다.",
-    "seonghoRating": 4.0,
+    "seonghoRating": 4,
     "seinRating": 0
   },
   {
@@ -984,7 +1002,7 @@
     "imagePath": "places/toriton-sushi-summary.webp",
     "seonghoOpinion": "꽤나 유명한 스시집인가보다. 대기가 있는 스시집이다? 무조건 정.답. 이다.",
     "seinOpinion": "의견을 입력하기 전입니다.",
-    "seonghoRating": 4.0,
+    "seonghoRating": 4,
     "seinRating": 0
   },
   {
@@ -1000,7 +1018,7 @@
     "imagePath": "places/odori-park-summary.webp",
     "seonghoOpinion": "화이트 일루미네이션! 쭉 한번 돌자",
     "seinOpinion": "의견을 입력하기 전입니다.",
-    "seonghoRating": 4.0,
+    "seonghoRating": 4,
     "seinRating": 0
   },
   {
@@ -1016,7 +1034,8 @@
     "seonghoOpinion": "료칸 갔다가 한번쯤은 돌겠지?",
     "seinOpinion": "의견을 입력하기 전입니다.",
     "seonghoRating": 3.7,
-    "seinRating": 0
+    "seinRating": 0,
+    "imagePath": "places/default-winter-travel-summary.webp"
   },
   {
     "id": 68,
@@ -1031,7 +1050,8 @@
     "seonghoOpinion": "르타오 다보겠나... 애매하다. 여기냐 파토스냐 어디냐",
     "seinOpinion": "의견을 입력하기 전입니다.",
     "seonghoRating": 3.8,
-    "seinRating": 0
+    "seinRating": 0,
+    "imagePath": "places/canal-plaza-summary.webp"
   },
   {
     "id": 69,
@@ -1062,7 +1082,7 @@
     "imagePath": "places/ramai-soup-curry-summary.webp",
     "seonghoOpinion": "스프카레 조 아 근데 여기는 좀 먼가?",
     "seinOpinion": "의견을 입력하기 전입니다.",
-    "seonghoRating": 4.0,
+    "seonghoRating": 4,
     "seinRating": 0
   },
   {
@@ -1093,7 +1113,8 @@
     "reviewSummary": "라벤더철이 아닌 계절에는 꽃밭 기대치를 낮춰야 한다는 의견이 많습니다. 겨울에는 기념품·카페·설경 목적이 분명할 때 투어에 넣는 편이 좋습니다. 이곳은 팜 토미타 하나만으로 판단하기보다 비에이·후라노의 계절·날씨·주변 동선이 맞을 때 만족도가 높아지는 유형입니다. 사진 한 장을 위한 급한 방문보다는, 근처의 다른 장소와 묶어 천천히 볼 때 후기에 나온 장점이 잘 드러납니다.",
     "seonghoOpinion": "겨울이니....애매 ㅎㅎ",
     "seinOpinion": "의견을 입력하기 전입니다.",
-    "seonghoRating": 3.0,
-    "seinRating": 0
+    "seonghoRating": 3,
+    "seinRating": 0,
+    "imagePath": "places/farm-tomita-summary.webp"
   }
 ]
